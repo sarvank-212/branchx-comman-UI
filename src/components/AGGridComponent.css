@@ -1,0 +1,559 @@
+/* AG Grid container - work within main-content layout */
+.ag-grid-container {
+  height: 100%; /* Take full height of parent container */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  max-height: calc(100vh - 20px); /* Account for main-content padding */
+}
+
+/* Fixed Header Section - Fixed within the component container */
+.fixed-header-section {
+  flex-shrink: 0; /* Don't shrink */
+  background: white;
+  border-bottom: 1px solid #dee2e6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky; /* Use sticky instead of fixed for better compatibility */
+  top: 0;
+  z-index: 100;
+}
+
+.grid-header {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.grid-info {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+/* Search section */
+.search-section {
+  padding: 0 20px 20px 20px;
+  background: white;
+}
+
+.search-container {
+  max-width: 450px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 16px 10px 45px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 15px;
+  height: 42px;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  font-size: 16px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.search-input:focus + .search-icon,
+.search-input:not(:placeholder-shown) + .search-icon {
+  opacity: 0;
+}
+
+.clear-search {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #6c757d;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  transition: color 0.2s ease;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.search-input:not(:placeholder-shown) ~ .clear-search {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.clear-search:hover {
+  color: #495057;
+}
+
+/* Action buttons section */
+.grid-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 16px 20px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  gap: 12px;
+}
+
+.grid-actions button {
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border: 2px solid;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 100px;
+  outline: none;
+}
+
+.grid-actions button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.grid-actions button:focus {
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.grid-actions button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Scrollable Grid Section - Takes remaining space */
+.scrollable-grid-section {
+  flex: 1; /* Take remaining space */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px; /* Ensure minimum height */
+}
+
+/* AG Grid - Full width and scrollable within its container */
+.ag-theme-quartz {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  overflow: auto !important; /* Enable scrolling within the grid container */
+}
+
+/* AG Grid column spacing - minimal gaps */
+.ag-theme-quartz .ag-header-cell {
+  padding: 8px 12px !important; /* Increased padding for better visibility */
+  text-align: center !important; /* Center align headers */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important; /* Consistent box model */
+  border-right: 1px solid #bdc3c7 !important;
+  background-color: #2F5755 !important; /* Dark teal header background */
+  color: white !important; /* White text for contrast */
+  font-weight: 600 !important; /* Make header text bolder */
+  font-size: 14px !important; /* Slightly larger font */
+  border-bottom: 2px solid #1e3a36 !important; /* Stronger border */
+}
+
+/* Override AG Grid default header text alignment */
+.ag-theme-quartz .ag-header-cell-text {
+  text-align: center !important;
+  justify-content: center !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  color: white !important;
+  background-color: transparent !important; /* Ensure no background override */
+}
+
+/* Override AG Grid default header styles - more specific */
+.ag-theme-quartz .ag-header {
+  background-color: #2F5755 !important;
+  border-bottom: 2px solid #1e3a36 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.ag-theme-quartz .ag-header-row {
+  background-color: #2F5755 !important;
+  height: 40px !important; /* Increased header height */
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.ag-theme-quartz .ag-cell {
+  padding: 2px 4px !important; /* Minimal cell padding */
+  line-height: 1.2 !important; /* Tighter line height */
+  text-align: center !important; /* Center align data */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important; /* Consistent box model */
+  border-right: 1px solid #ecf0f1 !important;
+}
+
+.ag-theme-quartz .ag-row {
+  height: 28px !important; /* Reduced row height */
+  border-bottom: 1px solid #ecf0f1;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Center align header text */
+.ag-theme-quartz .centered-header {
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Left align ID header */
+.ag-theme-quartz .id-header {
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure ID column cells have no extra padding */
+.ag-theme-quartz .ag-cell.id-cell {
+  padding: 2px 4px !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Actions column styling */
+.ag-theme-quartz .ag-cell.actions-cell {
+  padding: 4px 6px !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+.ag-theme-quartz .ag-cell.actions-cell button {
+  font-size: 12px !important;
+  padding: 4px 8px !important;
+  min-width: 28px !important;
+  height: 28px !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+.ag-theme-quartz .ag-cell.actions-cell button:hover {
+  transform: scale(1.05) !important;
+}
+
+/* Grid actions section */
+.grid-actions {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  padding: 16px 24px;
+}
+
+.grid-actions button {
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border: 2px solid;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 100px;
+  outline: none;
+}
+
+.grid-actions button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.grid-actions button:focus {
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.grid-actions button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+  .search-section {
+    padding: 16px 20px 12px 20px;
+  }
+
+  .search-container {
+    max-width: 100%;
+  }
+
+  .search-container input {
+    font-size: 13px;
+    min-width: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-actions {
+    padding: 10px 16px;
+  }
+
+  .grid-actions button {
+    padding: 6px 12px;
+    font-size: 12px;
+    gap: 4px;
+    min-width: 80px;
+  }
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.modal-body {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-cancel {
+  padding: 10px 20px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-submit {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.show-all-btn {
+  padding: 6px 12px;
+  background-color: #ffc107;
+  color: #212529;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  padding: 4px;
+}
+
+.ag-theme-quartz .ag-row:hover {
+  background-color: var(--ag-row-hover-color);
+}
+
+.ag-theme-quartz .ag-row-selected {
+  background-color: var(--ag-selected-row-background-color);
+  color: white;
+}
+
+/* AG Grid root wrapper - ensure perfect fit and column visibility */
+.ag-theme-quartz .ag-root-wrapper {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* Ensure AG Grid - Full width and scrollable within its container */
+.ag-theme-quartz {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  overflow: auto !important; /* Enable scrolling within the grid container */
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .ag-grid-container {
+    height: calc(100vh - 60px); /* Adjust for mobile layout */
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+  }
+
+  .grid-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0 10px;
+  }
+
+  .grid-header h2 {
+    font-size: 20px;
+  }
+
+  .ag-theme-quartz {
+    height: 100% !important; /* Use full available height on mobile */
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+  }
+
+  .pagination-container {
+    flex-wrap: wrap;
+    gap: 3px;
+    padding: 0 10px;
+  }
+
+  .pagination-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-actions {
+    padding: 10px 16px;
+  }
+
+  .grid-actions button {
+    padding: 6px 12px;
+    font-size: 12px;
+    gap: 4px;
+    min-width: 80px;
+  }
+}
+
+/* Global override for AG Grid header alignment - must be last */
+.ag-theme-quartz .ag-header-cell,
+.ag-theme-quartz .ag-header-cell-text {
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: #2F5755 !important;
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+}
+
+/* Ensure header background is not overridden */
+.ag-theme-quartz .ag-header,
+.ag-theme-quartz .ag-header-row,
+.ag-theme-quartz .ag-header-cell {
+  background-color: #2F5755 !important;
+  background-image: none !important;
+}
+
+/* Override any column-level styles that might affect headers */
+.ag-theme-quartz .ag-header-cell {
+  border-bottom: 2px solid #1e3a36 !important;
+  box-shadow: none !important;
+}

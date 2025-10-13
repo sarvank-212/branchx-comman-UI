@@ -1,0 +1,84 @@
+/* Custom dashboard colors and utilities */
+/* These complement Tailwind CSS classes */
+
+@layer base {
+  .bg-strip-dashboard {
+    background-color: #202939;
+  }
+
+  .dark .bg-strip-dashboard {
+    background-color: #364152;
+  }
+
+  .bg-bck-dashboard {
+    background-color: white;
+  }
+
+  .dark .bg-bck-dashboard {
+    background-color: #4B5565;
+  }
+
+  .text-primary-dashboard {
+    color: #202939;
+  }
+
+  .dark .text-primary-dashboard {
+    color: white;
+  }
+
+  .text-primary-b-dashboard {
+    color: #4B5565;
+  }
+
+  .dark .text-primary-b-dashboard {
+    color: #9AA4B2;
+  }
+
+  .bg-bck-dashboard-b {
+    background-color: #F7F8FA;
+  }
+
+  .dark .bg-bck-dashboard-b {
+    background-color: #4B5565;
+  }
+
+  .bg-text-label-dashboard {
+    background-color: #16a34a;
+  }
+
+  .dark .bg-text-label-dashboard {
+    background-color: #A9D49B;
+  }
+
+  .section-bg-dashboard {
+    background-color: white;
+  }
+
+  .dark .section-bg-dashboard {
+    background-color: #202939;
+  }
+
+  .bg-strip2-dashboard {
+    background-color: #F0F0F0;
+  }
+
+  .dark .bg-strip2-dashboard {
+    background-color: #364152;
+  }
+
+  .bg-strip2text-dashboard {
+    color: black;
+  }
+
+  .dark .bg-strip2text-dashboard {
+    color: white;
+  }
+
+  .section-bg2-dashboard {
+    background-color: white;
+  }
+
+  .dark .section-bg2-dashboard {
+    background-color: #202939;
+  }
+}
