@@ -49,7 +49,6 @@ export const THEMES = {
 // Module types
 export const MODULE_TYPES = {
   ADMIN: 'admin',
-  DASHBOARD: 'dashboard',
 }
 
 // API endpoints (legacy support - use specific service files)
@@ -60,13 +59,6 @@ export const ENDPOINTS = {
 
 // Default menu items configuration
 export const DEFAULT_MENU_ITEMS = [
-  {
-    id: 'dashboard',
-    name: 'Dashboard',
-    modules: [
-      { id: 'dashboard', name: 'Dashboard' }
-    ]
-  },
   {
     id: 'admin',
     name: 'Admin',

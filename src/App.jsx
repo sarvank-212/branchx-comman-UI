@@ -1,8 +1,7 @@
 import SideMenu from './components/layout/SideMenu'
 import AGGridComponent from './components/common/AGGridComponent'
-import DashboardPage from './pages/Dashboard/DashboardPage'
 import { useAppLogic } from './hooks/useAppLogic'
-import './App.css'
+import './styles/global.css'
 
 function App() {
   const {
@@ -16,9 +15,6 @@ function App() {
     handlePageChange,
   } = useAppLogic()
 
-  // Check if dashboard should be shown (when 'dashboard' module is selected)
-  const showDashboard = selectedModule === 'dashboard'
-
   return (
     <div className="app grid-layout">
       <SideMenu
@@ -30,8 +26,6 @@ function App() {
       <div className="main-content">
         {loading ? (
           <div className="loading">Loading...</div>
-        ) : showDashboard ? (
-          <DashboardPage />
         ) : (
           <AGGridComponent
             data={gridData}

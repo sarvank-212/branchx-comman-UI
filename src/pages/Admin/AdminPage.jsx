@@ -1,11 +1,13 @@
 import React from 'react'
+import AGGridComponent from '../components/common/AGGridComponent'
 
-const AdminPage = () => {
+const AdminPage = ({ moduleId, data, ...props }) => {
+  // This page simply renders a card with the grid inside - the grid handles header/search/actions
   return (
-    <div className="admin-page">
-      <h1>Admin Module</h1>
-      <p>Welcome to the Admin module. This page will contain admin-specific functionality.</p>
-      {/* Admin components will be added here */}
+    <div className="main-content">
+      <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+        <AGGridComponent selectedModule={moduleId} data={data} {...props} />
+      </div>
     </div>
   )
 }

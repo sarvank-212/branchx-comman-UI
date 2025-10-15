@@ -17,7 +17,7 @@ class AdminService {
   static async getUsers(params = {}) {
     try {
       const response = await httpClient.post(ADMIN_ENDPOINTS.USERS, {
-        pageSize: 10,
+        pageSize: 0,
         page: 1,
         filters: null,
         orderBy: [],
@@ -125,7 +125,7 @@ class AdminService {
   static async getModuleData(module, params = {}) {
     try {
       const response = await httpClient.post(`/${module}/paginate`, {
-        pageSize: 10,
+        pageSize: 1000, // Large page size to get all records
         page: 1,
         filters: null,
         orderBy: [],
@@ -133,18 +133,16 @@ class AdminService {
       })
       return response
     } catch (error) {
-      console.error(`Error fetching ${module} data:`, error)
       throw error
     }
   }
 
-  // Generic create operation for admin modules
-  static async createRecord(module, recordData) {
+  // Generic delete operation for admin modules
+  static async deleteRecord(module, recordId) {
     try {
-      const response = await httpClient.post(`/${module}/create`, recordData)
+      const response = await httpClient.delete(`/${module}/${recordId}`)
       return response
     } catch (error) {
-      console.error(`Error creating record in ${module}:`, error)
       throw error
     }
   }
@@ -159,7 +157,6 @@ class AdminService {
       })
       return response
     } catch (error) {
-      console.error(`Error calling ${method} ${endpoint}:`, error)
       throw error
     }
   }

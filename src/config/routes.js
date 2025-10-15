@@ -2,7 +2,6 @@ import { lazy } from 'react'
 
 // Lazy load pages for better performance
 const AdminPage = lazy(() => import('../pages/Admin/AdminPage'))
-const DashboardPage = lazy(() => import('../pages/Dashboard/DashboardPage'))
 
 // Route configuration
 export const routes = [
@@ -13,15 +12,9 @@ export const routes = [
     requiresAuth: true,
   },
   {
-    path: '/dashboard',
-    element: DashboardPage,
-    title: 'Dashboard',
-    requiresAuth: true,
-  },
-  {
     path: '/',
-    element: DashboardPage, // Default to dashboard
-    title: 'Dashboard',
+    element: AdminPage, // Default to admin
+    title: 'Admin',
     requiresAuth: true,
   },
 ]

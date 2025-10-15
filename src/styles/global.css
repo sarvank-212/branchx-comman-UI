@@ -1,84 +1,88 @@
-/* Custom dashboard colors and utilities */
-/* These complement Tailwind CSS classes */
+/* global.css - updated base styles and utilities */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-@layer base {
-  .bg-strip-dashboard {
-    background-color: #202939;
-  }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html,body,#root { height:100%; }
+body{
+  font-family: var(--font-sans);
+  font-size: var(--fz-md);
+  color: var(--text-900);
+  background: var(--bg-muted);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
 
-  .dark .bg-strip-dashboard {
-    background-color: #364152;
-  }
+/* layout grid */
+.grid-layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  height: 100vh;
+  gap: 0;
+}
 
-  .bg-bck-dashboard {
-    background-color: white;
-  }
+/* main content */
+.main-content {
+  padding: var(--space-lg);
+  overflow: auto;
+  height: 100%;
+}
 
-  .dark .bg-bck-dashboard {
-    background-color: #4B5565;
-  }
+/* cards */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-md);
+}
 
-  .text-primary-dashboard {
-    color: #202939;
-  }
+/* Buttons */
+.btn {
+  display:inline-flex; align-items:center; gap:8px;
+  padding: 8px 14px; border-radius: 8px;
+  font-weight:600; cursor:pointer; border:1px solid transparent;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.btn:active{ transform: translateY(0); }
+.btn:focus{ outline: none; box-shadow: 0 0 0 4px rgba(3,105,161,0.12); }
 
-  .dark .text-primary-dashboard {
-    color: white;
-  }
+/* Primary / Secondary */
+.btn-primary { background: var(--primary); color:white; border-color: var(--primary-600); box-shadow: var(--shadow-sm); }
+.btn-ghost { background: transparent; color: var(--text-600); border:1px solid var(--border); }
 
-  .text-primary-b-dashboard {
-    color: #4B5565;
-  }
+/* small */
+.btn-sm { padding:6px 10px; font-size:13px; border-radius:6px; }
 
-  .dark .text-primary-b-dashboard {
-    color: #9AA4B2;
-  }
+/* inputs */
+.input {
+  width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--border);
+  background: #fff; color: var(--text-900);
+}
+.input:focus{ outline:none; border-color: var(--accent); box-shadow: 0 6px 18px rgba(3,105,161,0.06); }
 
-  .bg-bck-dashboard-b {
-    background-color: #F7F8FA;
-  }
+/* header */
+.app-header {
+  display:flex; align-items:center; justify-content:space-between;
+  height: var(--header-height); padding: 0 var(--space-lg);
+  background: transparent;
+}
 
-  .dark .bg-bck-dashboard-b {
-    background-color: #4B5565;
-  }
+/* helpers */
+.flex { display:flex; }
+.items-center { align-items:center; }
+.gap-sm { gap: 8px; }
+.gap-md { gap: 16px; }
+.mr-md { margin-right: 16px; }
 
-  .bg-text-label-dashboard {
-    background-color: #16a34a;
-  }
+/* small text */
+.text-muted { color: var(--muted); font-size:13px; }
 
-  .dark .bg-text-label-dashboard {
-    background-color: #A9D49B;
-  }
-
-  .section-bg-dashboard {
-    background-color: white;
-  }
-
-  .dark .section-bg-dashboard {
-    background-color: #202939;
-  }
-
-  .bg-strip2-dashboard {
-    background-color: #F0F0F0;
-  }
-
-  .dark .bg-strip2-dashboard {
-    background-color: #364152;
-  }
-
-  .bg-strip2text-dashboard {
-    color: black;
-  }
-
-  .dark .bg-strip2text-dashboard {
-    color: white;
-  }
-
-  .section-bg2-dashboard {
-    background-color: white;
-  }
-
-  .dark .section-bg2-dashboard {
-    background-color: #202939;
-  }
+/* responsive */
+@media (max-width: 900px) {
+  .grid-layout{ grid-template-columns: 70px 1fr; }
+  .main-content{ padding: 12px; }
+}
+@media (max-width: 600px) {
+  .grid-layout{ grid-template-columns: 1fr; }
+  .main-content{ padding: 12px; }
 }
