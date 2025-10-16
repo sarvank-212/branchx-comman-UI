@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import AdminService from '../api/admin/adminService'
 import { DEFAULT_MENU_ITEMS } from '../config/constants'
+import { getFormFields } from '../config/columnSchemas'
 
 const maskSensitive = (rows) => {
   if (!Array.isArray(rows)) return rows
@@ -19,6 +20,8 @@ export const useAppLogic = () => {
   const [loading, setLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false)
+  const [formFields, setFormFields] = useState([])
 
   const fetchMenuItems = useCallback(async () => {
     try {
@@ -63,9 +66,33 @@ export const useAppLogic = () => {
   useEffect(() => {
     if (menuItems && menuItems.length > 0 && !selectedModule) {
       const firstModule = menuItems[0]?.modules?.[0]?.id
-      if (firstModule) { setSelectedModule(firstModule); setCurrentPage(1); fetchModuleData(firstModule, 1) }
+      if (firstModule) {
+        setSelectedModule(firstModule)
+        setCurrentPage(1)
+        fetchModuleData(firstModule, 1)
+      }
     }
   }, [menuItems, selectedModule, fetchModuleData])
+
+  // Generate form fields when selectedModule changes
+  useEffect(() => {
+    if (selectedModule) {
+      const fields = getFormFields(selectedModule)
+      setFormFields(fields)
+    }
+  }, [selectedModule])
+
+  const openAddModal = () => {
+    setIsAddModalOpen(true)
+  }
+
+  const closeAddModal = () => {
+    setIsAddModalOpen(false)
+  }
+
+  const handleAddSuccess = async () => {
+    await fetchModuleData(selectedModule, currentPage)
+  }
 
   // Expose window functions for grid actions safely
   useEffect(() => {
@@ -92,6 +119,7 @@ export const useAppLogic = () => {
         await fetchModuleData(selectedModule, currentPage)
       } catch (err) { alert('Delete failed') }
     }
+    window.openAddModal = openAddModal
 
     return () => {
       delete window.fetchModuleData
@@ -99,8 +127,9 @@ export const useAppLogic = () => {
       delete window.exportData
       delete window.editRecord
       delete window.deleteRecord
+      delete window.openAddModal
     }
-  }, [fetchModuleData, selectedModule, currentPage])
+  }, [fetchModuleData, selectedModule, currentPage, openAddModal, closeAddModal, handleAddSuccess])
 
   return {
     menuItems,
@@ -111,6 +140,11 @@ export const useAppLogic = () => {
     totalPages,
     handleModuleSelect,
     handlePageChange,
-    fetchModuleData
+    fetchModuleData,
+    isAddModalOpen,
+    openAddModal,
+    closeAddModal,
+    handleAddSuccess,
+    formFields
   }
 }

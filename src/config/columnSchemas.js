@@ -84,4 +84,50 @@ export const getAllColumns = (module) => {
   return [...columnSchemas.common, ...moduleColumns]
 }
 
+// Helper function to get form fields for creating new records
+export const getFormFields = (module) => {
+  const moduleColumns = getColumnSchema(module)
+
+  return moduleColumns
+    .filter(column => {
+      // Exclude system fields that shouldn't be in forms
+      const excludedFields = ['id', 'created_at', 'updated_at', 'createdAt', 'updatedAt']
+      return !excludedFields.includes(column.field)
+    })
+    .map(column => {
+      const formField = {
+        field: column.field,
+        headerName: column.headerName,
+        required: true, // Default to required, can be overridden
+        type: 'text' // Default type
+      }
+
+      // Set appropriate field types based on field names or column properties
+      if (column.field === 'email') {
+        formField.type = 'email'
+      } else if (column.field.includes('password')) {
+        formField.type = 'password'
+      } else if (column.field === 'status') {
+        formField.type = 'select'
+        formField.options = [
+          { value: 'ACTIVE', label: 'Active' },
+          { value: 'INACTIVE', label: 'Inactive' }
+        ]
+        formField.required = false // Status often has defaults
+      } else if (column.field === 'role') {
+        formField.type = 'select'
+        formField.options = [
+          { value: 'USER', label: 'User' },
+          { value: 'ADMIN', label: 'Admin' }
+        ]
+      } else if (column.field.includes('amount') || column.field.includes('price')) {
+        formField.type = 'number'
+      } else if (column.field.includes('date') || column.field.includes('Date')) {
+        formField.type = 'date'
+      }
+
+      return formField
+    })
+}
+
 export default columnSchemas

@@ -2,14 +2,14 @@
 
 /* === Layout === */
 .side-menu {
-  width: var(--sidebar-width, 240px);
+  width: var(--sidebar-width, 260px);
   height: 100vh;
   background: linear-gradient(180deg, #082f36 0%, #0a3a43 100%);
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 20px 14px;
+  padding: 22px 16px;
   box-sizing: border-box;
   border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -19,39 +19,49 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding-bottom: 14px;
+  gap: 10px;
+  padding-bottom: 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   margin-bottom: 20px;
+ 
 }
 
+
+/* larger BranchX logo */
 .menu-logo-wrap {
-  width: 54px;
-  height: 54px;
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 10px;
+  width: 140px; /* increased width for BranchX logo */
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+ 
+  background: transparent;
 }
 
+/* make sure SVG/logo scales cleanly */
 .menu-logo {
-  width: 54px;
-  height: 54px;
+  width: 100%;
+  height: auto;
+  max-height: 100px; /* controls vertical logo height */
   object-fit: contain;
-  border-radius: 10px;
+
+  transition: transform 0.2s ease, filter 0.2s ease;
+  filter: brightness(1.1);
 }
 
 .menu-logo:hover {
   transform: scale(1.05);
+  filter: brightness(1.2);
 }
 
 /* === Brand === */
 .brand-block {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
+  align-items: center;
+  text-align: center;
 }
 
 .brand {
@@ -74,11 +84,70 @@
   margin-top: 10px;
 }
 
+.menu-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #dfe7ea;
+  background: transparent;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.menu-item-header:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* 🛡️ Admin   ▼ spacing fix */
+.menu-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  color: #bcd3d6;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.menu-name {
+  flex: 1;
+  margin-left: 8px;   /* space between icon and name */
+  margin-right: 16px; /* space before ▼ arrow */
+  font-weight: 600;
+  font-size: 14px;
+  color: inherit;
+  text-align: left;
+}
+
+.menu-arrow {
+  margin-left: auto;
+  padding-left: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+}
+
+/* === Module List === */
+.menu-modules {
+  margin-left: 10px;
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .menu-module {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px;
+  padding: 8px 10px;
   border-radius: 8px;
   cursor: pointer;
   color: #dfe7ea;

@@ -51,23 +51,24 @@ function SideMenu({ menuItems = [], selectedModule, onModuleSelect }) {
       </button>
 
       <div className={`side-menu ${isMobileMenuOpen ? "mobile-open" : ""}`}>
-        {/* Company logo area */}
+        {/* Company logo area - changed class names to match CSS */}
         <div className="menu-header">
-          <div className="company-logo-container">
+          <div className="menu-logo-wrap">
             <img
               src={Logo}
               alt="Company Logo"
-              className="company-logo"
+              className="menu-logo"
               draggable="false"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                /* quick test: clicking toggles filesize visually via CSS if needed */
+                // optional: navigate to dashboard: window.location.href = '/dashboard';
+              }}
             />
           </div>
         </div>
-{/* 
-        <div className="brand-block">
-          <div className="brand">Admin</div>
-          <div className="brand-sub">BranchX</div>
-        </div> */}
 
+        {/* Menu items */}
         <div className="menu-items">
           {menuItems?.length > 0 ? (
             menuItems.map((item) => (
@@ -82,7 +83,6 @@ function SideMenu({ menuItems = [], selectedModule, onModuleSelect }) {
                     {item.id === "admin" ? "🛡️" : "📊"}
                   </span>
                   <span className="menu-name">{item.name}</span>
-                  {/* spacing between name and arrow handled in CSS */}
                   <span className="menu-arrow">
                     {expandedItems[item.id] ? " ▼" : " ▶"}
                   </span>

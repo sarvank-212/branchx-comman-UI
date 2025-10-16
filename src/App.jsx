@@ -1,5 +1,6 @@
 import SideMenu from './components/layout/SideMenu'
 import AGGridComponent from './components/common/AGGridComponent'
+import AddModal from './components/common/AddModal'
 import { useAppLogic } from './hooks/useAppLogic'
 import './styles/global.css'
 
@@ -13,6 +14,10 @@ function App() {
     totalPages,
     handleModuleSelect,
     handlePageChange,
+    isAddModalOpen,
+    closeAddModal,
+    handleAddSuccess,
+    formFields
   } = useAppLogic()
 
   return (
@@ -36,6 +41,14 @@ function App() {
           />
         )}
       </div>
+
+      <AddModal
+        isOpen={isAddModalOpen}
+        onClose={closeAddModal}
+        selectedModule={selectedModule}
+        onSuccess={handleAddSuccess}
+        formFields={formFields}
+      />
     </div>
   )
 }

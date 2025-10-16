@@ -137,10 +137,10 @@ class AdminService {
     }
   }
 
-  // Generic delete operation for admin modules
-  static async deleteRecord(module, recordId) {
+  // Generic create operation for admin modules
+  static async createRecord(module, recordData) {
     try {
-      const response = await httpClient.delete(`/${module}/${recordId}`)
+      const response = await httpClient.post(`/${module}/create`, recordData)
       return response
     } catch (error) {
       throw error

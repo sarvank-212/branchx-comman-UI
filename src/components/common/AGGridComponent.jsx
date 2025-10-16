@@ -236,8 +236,8 @@ function AGGridComponent({ data = [], selectedModule = null, currentPage = 1, to
             rowData={filtered}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}
-            rowHeight={54}
-            headerHeight={66}
+            rowHeight={45}
+            headerHeight={48}
             onGridReady={onGridReady}
             animateRows
             suppressRowClickSelection
